@@ -22,21 +22,24 @@ In the future we can add correct versions of java, node, python, and other bundl
 * /toolbox-cli - the NPM based module which leverages the oclif framework for generating the CLI.
     * The toolbox CLI is composed oclif "commands". Commands are hierarchically separated by folder names. The top level folder is ```./toolbox-cli/src/commands```
     * Within the `commands` directory, there are sub-directories which specify the command in the following manner:
-        * `./commands/{TYPE}/{NAME}/{VERSION}`
-          Examples:
-            `./commands/hashicorp/terraform/0.11.13`
-            `./commands/hashicorp/terraform/0.11.14`
-            `./commands/hashicorp/packer/1.4.3`
-            `./commands/aws/aws-cli/0.0.1`
-            `./commands/aws/aws-saml/0.0.1`
+        * ```./commands/{TYPE}/{NAME}/{VERSION}```
+            Examples:
+
+                ./commands/hashicorp/terraform/0.11.13
+                ./commands/hashicorp/terraform/0.11.14
+                ./commands/hashicorp/packer/1.4.3
+                ./commands/aws/aws-cli/0.0.1
+                ./commands/aws/aws-saml/0.0.1
+
     * The commands are evoked by using the `toolbox` command:
         Examples:
-          `toolbox aws:aws-saml:0.0.1 -i adfs.mywork.net -u josh.giron@mywork.net -r eu-west-1`
-          `toolbox aws:aws-cli:0.0.1 ec2 describe-instances`
-          `toolbox hashicorp:terraform:0.11.13 init`
-          `toolbox hashicorp:terraform:0.11.13 destroy`
-          `toolbox hashicorp:terraform:0.11.13 apply`
-          `toolbox ide:eclipse:4.4.1 &`
+
+          ➜  toolbox aws:aws-saml:0.0.1 -i adfs.mywork.net -u josh.giron@mywork.net -r eu-west-1
+          ➜  toolbox aws:aws-cli:0.0.1 ec2 describe-instances
+          ➜  toolbox hashicorp:terraform:0.11.13 init
+          ➜  toolbox hashicorp:terraform:0.11.13 destroy
+          ➜  toolbox hashicorp:terraform:0.11.13 apply
+          ➜  toolbox ide:eclipse:4.4.1 &
           ^ (This is sent to the background because it is a full GUI based app)
 ## Announcement
 
