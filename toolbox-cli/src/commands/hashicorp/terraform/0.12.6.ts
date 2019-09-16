@@ -14,8 +14,7 @@ export default class RunTerraform extends Command {
   static examples = [
     `$ toolbox run:terraform refresh`,
     `$ toolbox run:terraform plan`,
-    `$ toolbox run:terraform apply`,
-    `More details at: https://wiki.example.com/research_info/131`
+    `$ toolbox run:terraform apply`
   ]
 
   async run() {
