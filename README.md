@@ -42,11 +42,16 @@ In the future we can add correct versions of java, node, python, and other bundl
           ➜  toolbox ide:eclipse:4.4.1 &
           ^ (This is sent to the background because it is a full GUI based app)
 ## Announcement
+I am proud to announce the addition of a new software utility to aid you with cloud development and your company's DevOps journey. This new toolkit is called the “toolbox-cli” (toolbox command line interface).
 
-The Hybrid Cloud and DevOps Architecture team is proud to announce the addition of a new software utility to aid you with cloud development. This new toolkit is called the “toolbox-cli” (toolbox command line interface). It’s main purpose is for pre-packaging commonly used tools and software so that developers have a consistent experience across all teams and environments. The toolbox cli executes versioned and immutable Docker Containers for the operations. This means that as long as you have docker installed on your machine, the toolbox will work as expected across MacOS, Linux, and Windows!
+It’s main purpose is for pre-packaging commonly used tools and software so that developers, and your DevOps processes, have a consistent experience across all teams and environments. The toolbox cli executes versioned and immutable Docker Containers for the operations. This means that as long as you have docker installed on your machine, the toolbox will work as expected across MacOS, Linux, and Windows!
 
-At this time, we have released the toolbox with support for the AWS CLI itself as well as a universal AWS SAML script for retrieving temporary credentials based on your ActiveDirectory credentials. We plan to add new tooling such as build tools, debugging tools, deployment tools, and integrated development environments so that teams can be more effective and not have to worry about managing so many things. The Toolbox CLI will allow you to define team specific Docker container commands in the future as well; so, stay tuned!
+We plan to add new tooling such as build tools, debugging tools, deployment tools, and integrated development environments so that teams can be more effective and not have to worry about managing so many things. The Toolbox CLI will allow you to define team specific Docker container commands in the future as well; so, stay tuned!
 
+## Current toolbox commands
+[https://github.com/toolbox-cli/toolbox/blob/develop/toolbox-cli/README.md#commands](Toolbox CLI Commands)
+
+## Usage
 Below are the general usage details:
 ```bash
 ➜  toolbox run:aws-saml --environment dev-example --role Administrator --no-ssl-verify
@@ -78,6 +83,12 @@ To use this credential, call the AWS CLI with the --profile option (e.g. aws --p
         },
 …
 …
+
+➜  toolbox aws:aws-saml:0.0.1 -i adfs.mywork.net -u josh.giron@mywork.net -r eu-west-1
+➜  toolbox aws:aws-cli:0.0.1 ec2 describe-instances
+➜  toolbox hashicorp:terraform:0.11.13 init
+➜  toolbox hashicorp:terraform:0.11.13 destroy
+➜  toolbox hashicorp:terraform:0.11.13 apply
 ```
 
 The Toolbox CLI is now internally available and we would love immediate feedback!
