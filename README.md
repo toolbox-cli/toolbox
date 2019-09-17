@@ -49,7 +49,7 @@ It’s main purpose is for pre-packaging commonly used tools and software so tha
 We plan to add new tooling such as build tools, debugging tools, deployment tools, and integrated development environments so that teams can be more effective and not have to worry about managing so many things. The Toolbox CLI will allow you to define team specific Docker container commands in the future as well; so, stay tuned!
 
 ## Current toolbox commands
-[https://github.com/toolbox-cli/toolbox/blob/develop/toolbox-cli/README.md#commands](Toolbox CLI Commands)
+[Toolbox CLI Commands](https://github.com/toolbox-cli/toolbox/blob/develop/toolbox-cli/README.md#commands)
 
 ## Usage
 Below are the general usage details:
@@ -94,4 +94,4 @@ To use this credential, call the AWS CLI with the --profile option (e.g. aws --p
 The Toolbox CLI is now internally available and we would love immediate feedback!
 
 Please feel free to download and install the new tool by reading the installation details at:
-[/toolbox-cli/installation.md](installation.md)
+[installation.md](/toolbox-cli/installation.md)
