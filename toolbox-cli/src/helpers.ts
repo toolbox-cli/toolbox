@@ -1,12 +1,13 @@
 import {Command} from '@oclif/command'
 
 export async function execute_docker(context: Command,
-                                    filepath: string,
-                                    argv: Array<string>,
-                                    options?: {
-                                      docker_args?: Array<string>,
-                                      image_name?: string
-                                    }) {
+                                      filepath: string,
+                                      argv: Array<string>,
+                                      options: {
+                                        docker_args?: string[];
+                                        image_name?: string;
+                                      }
+                                    ) {
 
     var util = require('util');
     var spawn = util.promisify(require('child_process').spawn);

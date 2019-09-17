@@ -15,11 +15,11 @@ cli for running a growing list of containerized apps and tools.
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g toolbox
+$ npm install -g @toolbox-cli/toolbox
 $ toolbox COMMAND
 running command...
 $ toolbox (-v|--version|version)
-toolbox/0.0.1 linux-x64 node-v10.16.0
+@toolbox-cli/toolbox/0.0.1 darwin-x64 node-v12.10.0
 $ toolbox --help [COMMAND]
 USAGE
   $ toolbox COMMAND
@@ -29,19 +29,20 @@ USAGE
 # Commands
 <!-- commands -->
 * [`toolbox autocomplete [SHELL]`](#toolbox-autocomplete-shell)
+* [`toolbox aws:aws-cli:0.0.1`](#toolbox-awsaws-cli001)
+* [`toolbox aws:aws-saml:0.0.1`](#toolbox-awsaws-saml001)
 * [`toolbox commands`](#toolbox-commands)
+* [`toolbox hashicorp:ansible:0.0.1`](#toolbox-hashicorpansible001)
+* [`toolbox hashicorp:packer:1.4.3`](#toolbox-hashicorppacker143)
+* [`toolbox hashicorp:terraform:0.11.13`](#toolbox-hashicorpterraform01113)
+* [`toolbox hashicorp:terraform:0.12.6`](#toolbox-hashicorpterraform0126)
 * [`toolbox help [COMMAND]`](#toolbox-help-command)
-* [`toolbox ide:eclipse [FILE]`](#toolbox-ideeclipse-file)
+* [`toolbox ide:eclipse:4.4.1`](#toolbox-ideeclipse441)
 * [`toolbox plugins`](#toolbox-plugins)
 * [`toolbox plugins:install PLUGIN...`](#toolbox-pluginsinstall-plugin)
 * [`toolbox plugins:link PLUGIN`](#toolbox-pluginslink-plugin)
 * [`toolbox plugins:uninstall PLUGIN...`](#toolbox-pluginsuninstall-plugin)
 * [`toolbox plugins:update`](#toolbox-pluginsupdate)
-* [`toolbox run:ansible`](#toolbox-runansible)
-* [`toolbox run:aws-cli`](#toolbox-runaws-cli)
-* [`toolbox run:aws-saml`](#toolbox-runaws-saml)
-* [`toolbox run:packer`](#toolbox-runpacker)
-* [`toolbox run:terraform`](#toolbox-runterraform)
 * [`toolbox update [CHANNEL]`](#toolbox-update-channel)
 
 ## `toolbox autocomplete [SHELL]`
@@ -67,6 +68,35 @@ EXAMPLES
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.3/src/commands/autocomplete/index.ts)_
 
+## `toolbox aws:aws-cli:0.0.1`
+
+Launch the AWS cli via an executable docker container.
+
+```
+USAGE
+  $ toolbox aws:aws-cli:0.0.1
+
+EXAMPLES
+  $ toolbox run:aws-cli iam list-instance-profiles --no-verify-ssl
+  $ toolbox run:aws-cli cloudformation list-stacks
+```
+
+_See code: [src/commands/aws/aws-cli/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/aws/aws-cli/0.0.1.ts)_
+
+## `toolbox aws:aws-saml:0.0.1`
+
+Launch AWS SAML login script via an executable docker container.
+
+```
+USAGE
+  $ toolbox aws:aws-saml:0.0.1
+
+EXAMPLE
+  $ toolbox run:aws-saml --environment=dev-example --role=Administrator  --profile=default --no-verify-ssl
+```
+
+_See code: [src/commands/aws/aws-saml/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/aws/aws-saml/0.0.1.ts)_
+
 ## `toolbox commands`
 
 list all the commands
@@ -82,6 +112,85 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-commands](https://github.com/oclif/plugin-commands/blob/v1.2.2/src/commands/commands.ts)_
+
+## `toolbox hashicorp:ansible:0.0.1`
+
+Launch ansible 2.8.3 cli via an executable docker container.
+
+```
+USAGE
+  $ toolbox hashicorp:ansible:0.0.1
+
+ALIASES
+  $ toolbox run:ansible-playbook
+  $ toolbox run:ansible-vault
+  $ toolbox run:ansible-galaxy
+  $ toolbox run:ansible-console
+  $ toolbox run:ansible-config
+  $ toolbox run:ansible-doc
+  $ toolbox run:ansible-inventory
+  $ toolbox run:ansible-pull
+
+EXAMPLES
+  $ toolbox run:ansible <host-pattern> [options]
+  $ toolbox run:ansible-playbook [options] playbook.yml [playbook2 ...]
+  $ toolbox run:ansible-vault [create|decrypt|edit|encrypt|encrypt_string|rekey|view] [options] [vaultfile.yml]
+  $ toolbox run:ansible-galaxy [delete|import|info|init|install|list|login|remove|search|setup] [--help] [options] ...
+  $ toolbox run:ansible-console [<host-pattern>] [options]
+  $ toolbox run:ansible-config [view|dump|list] [--help] [options] [ansible.cfg]
+  $ toolbox run:ansible-doc [-l|-s] [options] [-t <plugin type] [plugin]
+  $ toolbox run:ansible-inventory [options] [host|group]
+  $ toolbox run:ansible-pull -U <repository> [options] [<playbook.yml>]
+```
+
+_See code: [src/commands/hashicorp/ansible/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/hashicorp/ansible/0.0.1.ts)_
+
+## `toolbox hashicorp:packer:1.4.3`
+
+Launch Packer 1.4.3 via an executable docker container.
+
+```
+USAGE
+  $ toolbox hashicorp:packer:1.4.3
+
+EXAMPLES
+  $ toolbox run:packer validate ./my-image.json
+  $ toolbox run:packer build ./my-image.json
+```
+
+_See code: [src/commands/hashicorp/packer/1.4.3.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/hashicorp/packer/1.4.3.ts)_
+
+## `toolbox hashicorp:terraform:0.11.13`
+
+Launch Terraform 0.11.13 via an executable docker container.
+
+```
+USAGE
+  $ toolbox hashicorp:terraform:0.11.13
+
+EXAMPLES
+  $ toolbox run:terraform refresh
+  $ toolbox run:terraform plan
+  $ toolbox run:terraform apply
+```
+
+_See code: [src/commands/hashicorp/terraform/0.11.13.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/hashicorp/terraform/0.11.13.ts)_
+
+## `toolbox hashicorp:terraform:0.12.6`
+
+Launch Terraform 0.12.6 via an executable docker container.
+
+```
+USAGE
+  $ toolbox hashicorp:terraform:0.12.6
+
+EXAMPLES
+  $ toolbox run:terraform refresh
+  $ toolbox run:terraform plan
+  $ toolbox run:terraform apply
+```
+
+_See code: [src/commands/hashicorp/terraform/0.12.6.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/hashicorp/terraform/0.12.6.ts)_
 
 ## `toolbox help [COMMAND]`
 
@@ -100,21 +209,16 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.0/src/commands/help.ts)_
 
-## `toolbox ide:eclipse [FILE]`
+## `toolbox ide:eclipse:4.4.1`
 
-describe the command here
+Launch the Eclipse 4.4.1 IDE via an executable docker container.
 
 ```
 USAGE
-  $ toolbox ide:eclipse [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ toolbox ide:eclipse:4.4.1
 ```
 
-_See code: [src/commands/ide/eclipse.ts](https://github.com/n0rig/toolbox/blob/v0.0.1/src/commands/ide/eclipse.ts)_
+_See code: [src/commands/ide/eclipse/4.4.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.1/src/commands/ide/eclipse/4.4.1.ts)_
 
 ## `toolbox plugins`
 
@@ -154,15 +258,15 @@ DESCRIPTION
 
   Installation of a user-installed plugin will override a core plugin.
 
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command 
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in 
   the CLI without the need to patch and update the whole CLI.
 
 ALIASES
   $ toolbox plugins:add
 
 EXAMPLES
-  $ toolbox plugins:install myplugin
+  $ toolbox plugins:install myplugin 
   $ toolbox plugins:install https://github.com/someuser/someplugin
   $ toolbox plugins:install someuser/someplugin
 ```
@@ -187,7 +291,7 @@ OPTIONS
 DESCRIPTION
   Installation of a linked plugin will override a user-installed or core plugin.
 
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
+  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello' 
   command will override the user-installed or core plugin implementation. This is useful for development work.
 
 EXAMPLE
@@ -232,99 +336,6 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v1.7.8/src/commands/plugins/update.ts)_
-
-## `toolbox run:ansible`
-
-Launch ansible cli via an executable docker container.
-
-```
-USAGE
-  $ toolbox run:ansible
-
-ALIASES
-  $ toolbox run:ansible-playbook
-  $ toolbox run:ansible-vault
-  $ toolbox run:ansible-galaxy
-  $ toolbox run:ansible-console
-  $ toolbox run:ansible-config
-  $ toolbox run:ansible-doc
-  $ toolbox run:ansible-inventory
-  $ toolbox run:ansible-pull
-
-EXAMPLES
-  $ toolbox run:ansible <host-pattern> [options]
-  $ toolbox run:ansible-playbook [options] playbook.yml [playbook2 ...]
-  $ toolbox run:ansible-vault [create|decrypt|edit|encrypt|encrypt_string|rekey|view] [options] [vaultfile.yml]
-  $ toolbox run:ansible-galaxy [delete|import|info|init|install|list|login|remove|search|setup] [--help] [options] ...
-  $ toolbox run:ansible-console [<host-pattern>] [options]
-  $ toolbox run:ansible-config [view|dump|list] [--help] [options] [ansible.cfg]
-  $ toolbox run:ansible-doc [-l|-s] [options] [-t <plugin type] [plugin]
-  $ toolbox run:ansible-inventory [options] [host|group]
-  $ toolbox run:ansible-pull -U <repository> [options] [<playbook.yml>]
-```
-
-_See code: [src/commands/run/ansible.ts](https://github.com/n0rig/toolbox/blob/v0.0.1/src/commands/run/ansible.ts)_
-
-## `toolbox run:aws-cli`
-
-Launch the AWS cli via an executable docker container.
-
-```
-USAGE
-  $ toolbox run:aws-cli
-
-EXAMPLES
-  $ toolbox run:aws-cli iam list-instance-profiles --no-verify-ssl
-  $ toolbox run:aws-cli cloudformation list-stacks
-```
-
-_See code: [src/commands/run/aws-cli.ts](https://github.com/n0rig/toolbox/blob/v0.0.1/src/commands/run/aws-cli.ts)_
-
-## `toolbox run:aws-saml`
-
-Launch AWS SAML login script via an executable docker container.
-
-```
-USAGE
-  $ toolbox run:aws-saml
-
-EXAMPLE
-  $ toolbox run:aws-saml --environment=dev-example --role=Administrator  --profile=default --no-verify-ssl
-```
-
-_See code: [src/commands/run/aws-saml.ts](https://github.com/n0rig/toolbox/blob/v0.0.1/src/commands/run/aws-saml.ts)_
-
-## `toolbox run:packer`
-
-Launch Packer via an executable docker container.
-
-```
-USAGE
-  $ toolbox run:packer
-
-EXAMPLES
-  $ toolbox run:packer validate ./my-image.json
-  $ toolbox run:packer build ./my-image.json
-```
-
-_See code: [src/commands/run/packer.ts](https://github.com/n0rig/toolbox/blob/v0.0.1/src/commands/run/packer.ts)_
-
-## `toolbox run:terraform`
-
-Launch Terraform via an executable docker container.
-
-```
-USAGE
-  $ toolbox run:terraform
-
-EXAMPLES
-  $ toolbox run:terraform refresh
-  $ toolbox run:terraform plan
-  $ toolbox run:terraform apply
-  More details at: https://wiki.example.com/research_info/131
-```
-
-_See code: [src/commands/run/terraform.ts](https://github.com/n0rig/toolbox/blob/v0.0.1/src/commands/run/terraform.ts)_
 
 ## `toolbox update [CHANNEL]`
 

@@ -1,5 +1,5 @@
 {
-  "name": "toolbox",
+  "name": "@toolbox-cli/toolbox",
   "description": "cli for running a growing list of containerized apps and tools.",
   "version": "0.0.1",
   "author": "Josh Giron",
@@ -9,7 +9,9 @@
   "pkg": {
     "scripts": "./lib/**/*.js"
   },
-  "bugs": "https://github.com/n0rig/toolbox/issues",
+  "bugs": {
+    "url": "https://github.com/toolbox-cli/toolbox/issues"
+  },
   "dependencies": {
     "@oclif/command": "^1.5.18",
     "@oclif/config": "^1.13.2",
@@ -39,7 +41,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/n0rig/toolbox",
+  "homepage": "https://github.com/toolbox-cli/toolbox",
   "keywords": [
     "oclif"
   ],
@@ -57,10 +59,19 @@
       "@oclif/plugin-warn-if-update-available"
     ],
     "macos": {
-      "identifier": "com.n0rig.toolbox"
+      "identifier": "com.toolbox.cli"
+    },
+    "warn-if-update-available": {
+      "timeoutInDays": 7,
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>. To update, please run `toolbox update`.",
+      "authorization": "923c8356-7869-4aa9-93aa-4cc4c349d9d0"
     }
   },
-  "repository": "n0rig/toolbox",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toolbox-cli/toolbox.git",
+    "directory": "toolbox-cli"
+  },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p . -t stylish",
@@ -68,5 +79,8 @@
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md"
   },
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  }
 }
