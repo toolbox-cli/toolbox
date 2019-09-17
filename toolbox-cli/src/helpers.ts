@@ -13,7 +13,9 @@ export async function execute_docker(context: Command,
     var spawn = util.promisify(require('child_process').spawn);
     var version = context.config.pjson.version
     var name_fields = extract_name_fields_from_path(filepath)
-    console.log(`command_type: ${name_fields.command_type} command_name: ${name_fields.command_name} command_version: ${name_fields.command_version}`)
+    if (context.config.debug) {
+      console.log(`command_type: ${name_fields.command_type} command_name: ${name_fields.command_name} command_version: ${name_fields.command_version}`)
+    }
 
     // No custom docker image path provided; generate a relative one to our repos
   if (!options.image_name) {
