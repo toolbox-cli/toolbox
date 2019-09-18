@@ -1,0 +1,86 @@
+{
+  "name": "@toolbox-cli/toolbox",
+  "description": "cli for running a growing list of containerized apps and tools.",
+  "version": "0.0.2",
+  "author": "Josh Giron",
+  "bin": {
+    "toolbox": "./bin/run"
+  },
+  "pkg": {
+    "scripts": "./lib/**/*.js"
+  },
+  "bugs": {
+    "url": "https://github.com/toolbox-cli/toolbox/issues"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.5.18",
+    "@oclif/config": "^1.13.2",
+    "@oclif/plugin-help": "^2.2.0",
+    "@oclif/plugin-update": "^1.3.9",
+    "@oclif/plugin-plugins": "^1.7.8",
+    "@oclif/plugin-autocomplete": "^0.1.3",
+    "@oclif/plugin-commands": "^1.2.2",
+    "@oclif/plugin-warn-if-update-available": "^1.7.0",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.0",
+    "@oclif/tslint": "^3.1.1",
+    "@types/node": "^10.14.13",
+    "globby": "^10.0.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/toolbox-cli/toolbox",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "toolbox",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-update",
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-autocomplete",
+      "@oclif/plugin-commands",
+      "@oclif/plugin-warn-if-update-available"
+    ],
+    "macos": {
+      "identifier": "com.toolbox.cli"
+    },
+    "warn-if-update-available": {
+      "timeoutInDays": 7,
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>. To update, please run `toolbox update`.",
+      "authorization": "923c8356-7869-4aa9-93aa-4cc4c349d9d0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toolbox-cli/toolbox.git",
+    "directory": "toolbox-cli"
+  },
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "tslint -p . -t stylish",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  }
+}

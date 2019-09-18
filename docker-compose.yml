@@ -1,0 +1,57 @@
+version: '2.2'
+
+services:
+
+  # base service
+  base:
+    build:
+      context: "./cli-command-images/base/base"
+
+  # Redhat Ansible component
+  ansible:
+    depends_on:
+      - base
+    build:
+      context: "./cli-command-images/hashicorp/ansible"
+
+  # aws-cli component
+  aws-cli:
+    depends_on:
+      - base
+    build:
+      context: "./cli-command-images/aws/aws-cli"
+
+  # aws-saml component
+  aws-saml:
+    depends_on:
+      - aws-cli
+    build:
+      context: "./cli-command-images/aws/aws-saml"
+
+  # jq component
+  jq:
+    depends_on:
+      - base
+    build:
+      context: "./cli-command-images/utility/jq"
+
+  # Hashicorp Packer component
+  packer:
+    depends_on:
+      - vagrant
+    build:
+      context: "./cli-command-images/hashicorp/packer"
+
+  # Hashicorp Terraform component
+  terraform:
+    depends_on:
+      - base
+    build:
+      context: "./cli-command-images/hashicorp/terraform"
+
+  # Hashicorp Vagrant component
+  vagrant:
+    depends_on:
+      - base
+    build:
+      context: "./cli-command-images/hashicorp/vagrant"
