@@ -1,5 +1,5 @@
 import {Command} from '@oclif/command'
-import { PJSON } from '@oclif/config';
+const { spawn } = require('child_process');
 
 export async function execute_docker(context: Command,
                                       filepath: string,
@@ -11,7 +11,6 @@ export async function execute_docker(context: Command,
                                     ) {
 
     var util = require('util');
-    var spawn = util.promisify(require('child_process').spawn);
     var name_fields = extract_name_fields_from_path(filepath)
     if (context.config.debug) {
       console.log(`command_type: ${name_fields.command_type} command_name: ${name_fields.command_name} command_version: ${name_fields.command_version}`)
@@ -42,13 +41,27 @@ export async function execute_docker(context: Command,
     }
 
     // Spawn the docker command.
-    spawn(`${command_full}`, {
+    const command_process = spawn(`${command_full}`, {
                               cwd: process.cwd(),
                               detached: true,
                               shell: true,
                               stdio: 'inherit'
                             }
-    );
+    )
+
+    command_process.on('error', (err) => {
+      console.error('Failed to start subprocess.');
+    });
+
+    command_process.on('close', (code) => {
+      if (code !== 0 && context.config.debug) {
+        console.log(`[!] '${name_fields.command_name}' exited with code ${code}`);
+      }
+
+      if (code == 125) {
+        console.log(`Is the Docker engine installed and running?`)
+      }
+    });
 }
 export function get_image_name(context: Command,
                                 filepath: string,
