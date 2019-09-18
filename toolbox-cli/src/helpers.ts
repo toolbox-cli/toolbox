@@ -49,11 +49,11 @@ export async function execute_docker(context: Command,
                             }
     )
 
-    command_process.on('error', (err) => {
+    command_process.on('error', () => {
       console.error('Failed to start subprocess.');
     });
 
-    command_process.on('close', (code) => {
+    command_process.on('close', (code: number) => {
       if (code !== 0 && context.config.debug) {
         console.log(`[!] '${name_fields.command_name}' exited with code ${code}`);
       }
