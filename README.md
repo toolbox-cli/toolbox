@@ -18,7 +18,7 @@ In the future we can add correct versions of java, node, python, and other bundl
 
 ## Structure
 * ./Makefile -- triggers the build steps. It creates versioned images and creates an NPM module which executes the versioned docker images.
-* /components -- Contains the dockerfiles for creating the images
+* /cli-command-images -- Contains the dockerfiles for creating the images
 * /toolbox-cli - the NPM based module which leverages the oclif framework for generating the CLI.
     * The toolbox CLI is composed oclif "commands". Commands are hierarchically separated by folder names. The top level folder is ```./toolbox-cli/src/commands```
     * Within the `commands` directory, there are sub-directories which specify the command in the following manner:

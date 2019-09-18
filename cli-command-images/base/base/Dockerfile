@@ -8,11 +8,9 @@ USER root
 # Otherwise the container entrypoint doesn't work as intended :/
 ARG BIN_DIR=${BIN_DIR:-"/usr/local/bin"}
 ARG GOSU_VERSION=${GOSU_VERSION:-"1.11"}
-ARG NAME=${NAME:-"devops/toolbox"}
 ARG VERSION=${VERSION:-"latest"}
 
 ENV PATH="/usr/local/sbin:${BIN_DIR}:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.local/bin" \
-    NAME=${NAME} \
     VERSION=${VERSION}
 
 RUN apk --no-cache add tzdata && \

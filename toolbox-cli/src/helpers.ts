@@ -1,4 +1,5 @@
 import {Command} from '@oclif/command'
+import { PJSON } from '@oclif/config';
 
 export async function execute_docker(context: Command,
                                       filepath: string,
@@ -11,17 +12,11 @@ export async function execute_docker(context: Command,
 
     var util = require('util');
     var spawn = util.promisify(require('child_process').spawn);
-    var version = context.config.pjson.version
     var name_fields = extract_name_fields_from_path(filepath)
     if (context.config.debug) {
       console.log(`command_type: ${name_fields.command_type} command_name: ${name_fields.command_name} command_version: ${name_fields.command_version}`)
     }
-
-    // No custom docker image path provided; generate a relative one to our repos
-  if (!options.image_name) {
-      options.image_name = `devops/toolbox/${name_fields.command_name}:${name_fields.command_version}`
-      console.log(`${options.image_name}`)
-    }
+    options.image_name = get_image_name(context, filepath, argv, options)
 
     // If no custom extra docker_args, just set it to empty
     if (!options.docker_args) {
@@ -55,6 +50,31 @@ export async function execute_docker(context: Command,
                             }
     );
 }
+export function get_image_name(context: Command,
+                                filepath: string,
+                                argv: Array<string>,
+                                options: {
+                                  docker_args?: string[];
+                                  image_name?: string;
+                                }
+                              ) {
+  let docker_registry: string = normalized_toolbox_config().docker_registry
+  var name_fields = extract_name_fields_from_path(filepath)
+  var image_name = options.image_name
+  if (context.config.debug) {
+    console.log(`command_type: ${name_fields.command_type} command_name: ${name_fields.command_name} command_version: ${name_fields.command_version}`)
+  }
+
+  // Let's use the dockerhub naming pattern (you cannot have multiple folders)
+  if (docker_registry) {
+    image_name = `${docker_registry}:${name_fields.command_type}_${name_fields.command_name}_${name_fields.command_version}`
+    return image_name
+  }
+
+  // Let's use the dockerhub naming pattern LOCALLY (you cannot have multiple folders)
+  image_name = `${name_fields.command_type}_${name_fields.command_name}_${name_fields.command_version}`
+  return image_name
+}
 
 export function extract_name_fields_from_path(filepath: string) {
   var command_version = require('path').basename(filepath).split(".ts")[0].split(".js")[0]; // Remove extensions from name.
@@ -78,4 +98,11 @@ export function get_command_name(filepath: string) {
 }
 export function get_command_version(filepath: string) {
   return extract_name_fields_from_path(filepath).command_version
+}
+
+export function normalized_toolbox_config() {
+  var normalizeData = require('normalize-package-data')
+  var packageData = require("../toolbox.json")
+  normalizeData(packageData)
+  return packageData
 }

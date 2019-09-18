@@ -1,5 +1,4 @@
-REPO_NAME  ?= toolbox
-NAME       := devops/${REPO_NAME}
+REPO_NAME  ?= $(shell jq -r ".docker_registry" toolbox-cli/toolbox.json)
 VERSION    := 0.0.1
 CLI_PATH   := ./toolbox-cli
 
@@ -9,13 +8,13 @@ all: build tag npm-link
 
 .PHONY: check_vars
 check_vars:
-	@test $(NAME)
+	@test $(REPO_NAME)
 	@test $(VERSION)
 
 .PHONY: build
 build: install-dependencies
 	make check_vars
-	NAME="$(NAME)" VERSION="$(VERSION)" docker-compose build --compress
+	VERSION="$(VERSION)" docker-compose build --compress
 
 .ONESHELL:
 .PHONY: npm-link
@@ -40,12 +39,12 @@ package: install-dependencies
 .PHONY: tag
 tag: build
 	make check_vars
-	@./tag.sh "$(NAME)" "$(VERSION)" "${REPO_NAME}"
+	@./tag.sh "$(REPO_NAME)" "$(VERSION)"
 
 .PHONY: push
 push: build
 	make check_vars
-	@./push.sh "$(NAME)" "$(VERSION)"
+	@./push.sh "$(REPO_NAME)" "$(VERSION)"
 
 install-dependencies:
 	# Install node: https://github.com/nodesource/distributions/blob/master/README.md

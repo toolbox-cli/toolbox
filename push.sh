@@ -13,7 +13,6 @@ do
   `docker images --filter=reference="$COMPOSE_PREFIX*$COMPONENT_NAME*:latest" | grep -sq "$COMPONENT_NAME" ` || \
   { echo "[!] Latest image is missing for '$COMPONENT_NAME'! Skipping..." && continue; }
 
-  echo "Tagging '${COMPOSE_PREFIX}_${COMPONENT_NAME}:latest' image as '$REPO_NAME:${COMPONENT_TYPE}_${COMPONENT_NAME}_$VERSION'"
-  docker tag ${COMPOSE_PREFIX}_${COMPONENT_NAME}:latest ${COMPONENT_TYPE}_${COMPONENT_NAME}_$VERSION || exit 1
-  docker tag ${COMPONENT_TYPE}_${COMPONENT_NAME}_$VERSION $REPO_NAME:${COMPONENT_TYPE}_${COMPONENT_NAME}_$VERSION || exit 2
+  echo "Pushing image '${COMPONENT_TYPE}_${COMPONENT_NAME}_$VERSION' to '$REPO_NAME'"
+  docker push $REPO_NAME:${COMPONENT_TYPE}_${COMPONENT_NAME}_$VERSION || exit 1
 done

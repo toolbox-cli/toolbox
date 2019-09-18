@@ -5,53 +5,53 @@ services:
   # base service
   base:
     build:
-      context: "./components/base"
+      context: "./cli-command-images/base/base"
 
   # Redhat Ansible component
   ansible:
     depends_on:
       - base
     build:
-      context: "./components/ansible"
+      context: "./cli-command-images/hashicorp/ansible"
 
   # aws-cli component
   aws-cli:
     depends_on:
       - base
     build:
-      context: "./components/aws-cli"
+      context: "./cli-command-images/aws/aws-cli"
 
   # aws-saml component
   aws-saml:
     depends_on:
       - aws-cli
     build:
-      context: "./components/aws-saml"
+      context: "./cli-command-images/aws/aws-saml"
 
   # jq component
   jq:
     depends_on:
       - base
     build:
-      context: "./components/jq"
+      context: "./cli-command-images/utility/jq"
 
   # Hashicorp Packer component
   packer:
     depends_on:
       - vagrant
     build:
-      context: "./components/packer"
+      context: "./cli-command-images/hashicorp/packer"
 
   # Hashicorp Terraform component
   terraform:
     depends_on:
       - base
     build:
-      context: "./components/terraform"
+      context: "./cli-command-images/hashicorp/terraform"
 
   # Hashicorp Vagrant component
   vagrant:
     depends_on:
       - base
     build:
-      context: "./components/vagrant"
+      context: "./cli-command-images/hashicorp/vagrant"
