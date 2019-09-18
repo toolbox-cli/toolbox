@@ -19,7 +19,7 @@ $ npm install -g @toolbox-cli/toolbox
 $ toolbox COMMAND
 running command...
 $ toolbox (-v|--version|version)
-@toolbox-cli/toolbox/0.0.3 darwin-x64 node-v12.10.0
+@toolbox-cli/toolbox/0.0.4 darwin-x64 node-v12.10.0
 $ toolbox --help [COMMAND]
 USAGE
   $ toolbox COMMAND
@@ -31,6 +31,7 @@ USAGE
 * [`toolbox autocomplete [SHELL]`](#toolbox-autocomplete-shell)
 * [`toolbox aws:aws-cli:0.0.1`](#toolbox-awsaws-cli001)
 * [`toolbox aws:aws-saml:0.0.1`](#toolbox-awsaws-saml001)
+* [`toolbox bitnami:kubectl:1.15.3`](#toolbox-bitnamikubectl1153)
 * [`toolbox commands`](#toolbox-commands)
 * [`toolbox hashicorp:ansible:0.0.1`](#toolbox-hashicorpansible001)
 * [`toolbox hashicorp:packer:1.4.3`](#toolbox-hashicorppacker143)
@@ -81,7 +82,7 @@ EXAMPLES
   $ toolbox run:aws-cli cloudformation list-stacks
 ```
 
-_See code: [src/commands/aws/aws-cli/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/aws/aws-cli/0.0.1.ts)_
+_See code: [src/commands/aws/aws-cli/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/aws/aws-cli/0.0.1.ts)_
 
 ## `toolbox aws:aws-saml:0.0.1`
 
@@ -95,7 +96,23 @@ EXAMPLE
   $ toolbox run:aws-saml --environment=dev-example --role=Administrator  --profile=default --no-verify-ssl
 ```
 
-_See code: [src/commands/aws/aws-saml/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/aws/aws-saml/0.0.1.ts)_
+_See code: [src/commands/aws/aws-saml/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/aws/aws-saml/0.0.1.ts)_
+
+## `toolbox bitnami:kubectl:1.15.3`
+
+Launch Terraform 1.15.3 via an executable docker container.
+
+```
+USAGE
+  $ toolbox bitnami:kubectl:1.15.3
+
+EXAMPLES
+  $ toolbox run:terraform refresh
+  $ toolbox run:terraform plan
+  $ toolbox run:terraform apply
+```
+
+_See code: [src/commands/bitnami/kubectl/1.15.3.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/bitnami/kubectl/1.15.3.ts)_
 
 ## `toolbox commands`
 
@@ -143,7 +160,7 @@ EXAMPLES
   $ toolbox run:ansible-pull -U <repository> [options] [<playbook.yml>]
 ```
 
-_See code: [src/commands/hashicorp/ansible/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/hashicorp/ansible/0.0.1.ts)_
+_See code: [src/commands/hashicorp/ansible/0.0.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/hashicorp/ansible/0.0.1.ts)_
 
 ## `toolbox hashicorp:packer:1.4.3`
 
@@ -158,7 +175,7 @@ EXAMPLES
   $ toolbox run:packer build ./my-image.json
 ```
 
-_See code: [src/commands/hashicorp/packer/1.4.3.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/hashicorp/packer/1.4.3.ts)_
+_See code: [src/commands/hashicorp/packer/1.4.3.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/hashicorp/packer/1.4.3.ts)_
 
 ## `toolbox hashicorp:terraform:0.11.13`
 
@@ -174,7 +191,7 @@ EXAMPLES
   $ toolbox run:terraform apply
 ```
 
-_See code: [src/commands/hashicorp/terraform/0.11.13.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/hashicorp/terraform/0.11.13.ts)_
+_See code: [src/commands/hashicorp/terraform/0.11.13.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/hashicorp/terraform/0.11.13.ts)_
 
 ## `toolbox hashicorp:terraform:0.12.6`
 
@@ -190,7 +207,7 @@ EXAMPLES
   $ toolbox run:terraform apply
 ```
 
-_See code: [src/commands/hashicorp/terraform/0.12.6.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/hashicorp/terraform/0.12.6.ts)_
+_See code: [src/commands/hashicorp/terraform/0.12.6.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/hashicorp/terraform/0.12.6.ts)_
 
 ## `toolbox help [COMMAND]`
 
@@ -218,7 +235,7 @@ USAGE
   $ toolbox ide:eclipse:4.4.1
 ```
 
-_See code: [src/commands/ide/eclipse/4.4.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.3/src/commands/ide/eclipse/4.4.1.ts)_
+_See code: [src/commands/ide/eclipse/4.4.1.ts](https://github.com/toolbox-cli/toolbox/blob/v0.0.4/src/commands/ide/eclipse/4.4.1.ts)_
 
 ## `toolbox plugins`
 
