@@ -1,7 +1,7 @@
 {
   "name": "@toolbox-cli/toolbox",
   "description": "cli for running a growing list of containerized apps and tools.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Josh Giron",
   "bin": {
     "toolbox": "./bin/run"
