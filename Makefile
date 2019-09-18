@@ -17,7 +17,6 @@ build: install-dependencies
 	VERSION="$(VERSION)" docker-compose build --compress
 
 .ONESHELL:
-.PHONY: npm-link
 npm-link: build
 	make check_vars
 	rm -rf ./node-modules
@@ -29,13 +28,6 @@ npm-link: build
 	npm install ${CLI_PATH}
 	sudo npm link ${CLI_PATH}
 
-.ONESHELL:
-package: install-dependencies
-	cd toolbox-cli
-	npm install
-	oclif-dev pack
-	# Todo: Upload the archives somewhere...
-
 .PHONY: tag
 tag: build
 	make check_vars
@@ -45,6 +37,24 @@ tag: build
 push: build
 	make check_vars
 	@./push.sh "$(REPO_NAME)" "$(VERSION)"
+
+.ONESHELL:
+toolbox-patch-release: install-dependencies
+	cd toolbox-cli; \
+	pwd; \
+	npx release-it -- patch --ci
+
+.ONESHELL:
+toolbox-minor-release: install-dependencies
+	cd toolbox-cli; \
+	pwd; \
+	npx release-it -- minor --ci
+
+.ONESHELL:
+toolbox-major-release: install-dependencies
+	cd toolbox-cli; \
+	pwd; \
+	npx release-it -- major --ci
 
 install-dependencies:
 	# Install node: https://github.com/nodesource/distributions/blob/master/README.md
