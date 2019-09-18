@@ -71,17 +71,30 @@ export function get_image_name(context: Command,
                                   image_name?: string;
                                 }
                               ) {
-  let docker_registry: string = normalized_toolbox_config().docker_registry
+
+  var command_config = extract_command_config(filepath)
   var name_fields = extract_name_fields_from_path(filepath)
   var image_name = options.image_name
   if (context.config.debug) {
     console.log(`command_type: ${name_fields.command_type} command_name: ${name_fields.command_name} command_version: ${name_fields.command_version}`)
   }
 
-  // Let's use the dockerhub naming pattern (you cannot have multiple folders)
-  if (docker_registry) {
-    image_name = `${docker_registry}:${name_fields.command_type}_${name_fields.command_name}_${name_fields.command_version}`
+  // If the image name is passed in, let's use that as the ultimate source of truth
+  if (image_name) {
     return image_name
+  }
+
+  // Let's use the dockerhub naming pattern (you cannot have multiple folders)
+  try {
+    if (command_config.docker_registry) {
+      image_name = `${command_config.docker_registry}:${name_fields.command_type}_${name_fields.command_name}_${name_fields.command_version}`
+      return image_name
+    }
+  }
+  catch (e) {
+    if (context.config.debug) {
+      console.log(`The command '${name_fields.command_name}' does not have a docker registry defined in 'toolbox.json'`)
+    }
   }
 
   // Let's use the dockerhub naming pattern LOCALLY (you cannot have multiple folders)
@@ -117,5 +130,17 @@ export function normalized_toolbox_config() {
   var normalizeData = require('normalize-package-data')
   var packageData = require("../toolbox.json")
   normalizeData(packageData)
-  return packageData
+  var json_string = JSON.stringify(packageData)
+  return JSON.parse(json_string)
+}
+
+export function extract_command_config(filepath: string) {
+  try {
+    var name_fields = extract_name_fields_from_path(filepath)
+    var command_config = normalized_toolbox_config()["commands"][`${name_fields.command_type}`][`${name_fields.command_name}`]
+    return command_config
+  }
+  catch (e) {
+    return ""
+  }
 }

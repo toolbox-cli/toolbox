@@ -1,3 +1,9 @@
 {
-  "docker_registry": "docker.io/toolboxcli/toolbox"
+  "commands": {
+      "aws": {
+          "aws-cli": {
+            "docker_registry": "docker.io/toolboxcli/toolbox"
+          }
+        }
+    }
 }
